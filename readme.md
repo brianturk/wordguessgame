@@ -1,0 +1,1 @@
+This is a word guessing game with all sports terms.  Please see the "Help" page in the application for more assistance.

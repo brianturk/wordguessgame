@@ -16,3 +16,11 @@ body {
 #result {
   font-family: 'Luckiest Guy', cursive;
 }
+
+.navbar-brand {
+  font-size:  85%;
+}
+
+.navbar-nav {
+  font-size: 85%;
+}

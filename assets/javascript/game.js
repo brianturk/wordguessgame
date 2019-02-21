@@ -1,45 +1,21 @@
-var stLength = sport_terms.length;
+//Note that sport_terms is defined in the sport_terms.js file
+
+
+var wins = 0;
 var gameover = false;
-var guessesLeft = 10;
-var firsttime = true;
-
-//randomly pick a sports term to use
-var stNum = Math.floor((Math.random() * stLength) + 1);
-
-//Get sports term
-var st = "";
-st = sport_terms[stNum][1].trim().toLowerCase();
-
-//Display game type
-var gameType = "";
-gameType = sport_terms[stNum][0].trim().toLowerCase();
-document.getElementById('gametype').innerHTML += "&nbsp" + gameType;
-
-//Build dashes
+var guessesLeft = 0;
+var stNum = 0;
 var blankHangman = "";
 var guessedLetters = "";
-var blanks = 0;
-for (var x = 0; x < st.length; x++) {
-	if (st.substring(x, x + 1) === " ") {
-		blankHangman = blankHangman + " ";
-		blanks++;
-	} else {
-		blankHangman = blankHangman + "-";
-	}
-};
-document.getElementById('puzzle').innerHTML = blankHangman;
-document.getElementById('guessesleft').innerHTML = guessesLeft;
+var st = "";
+var plural = "";
+
+startgame();
 
 document.onkeyup = function (event) {
 	var key = event.key || event.keyCode;
 	key = key.toLowerCase();
 	var match = false;
-
-	if (firsttime) {
-		firsttime = false;
-
-	}
-
 
 	if ((key.search(/[^A-Za-z]/g)) && (!(gameover)) && (key.length === 1)) {    //only take letters as input and it is a new letter
 
@@ -57,12 +33,21 @@ document.onkeyup = function (event) {
 				}
 			}
 
+
+
 			document.getElementById('puzzle').innerHTML = blankHangman;
 
 			if (match) { //check for word done
 				if (blankHangman === st) {
 					gameover = true;
-					document.getElementById('result').innerHTML = "You got it!";
+					wins++;
+					if (wins === 1) {
+						plural = "";
+					} else {
+						plural = "s";
+					}
+					document.getElementById('result').innerHTML = "You got it! You have " + wins + " win" + plural + ".";
+					document.getElementById('restart').innerHTML = '<a href="javascript:startgame()"> Play Again</a>';
 					document.getElementById('bodybg').style.background = "rgb(110, 230, 110)";
 				} else {
 					document.getElementById('result').innerHTML = "Good job! Keep going...";
@@ -74,6 +59,7 @@ document.onkeyup = function (event) {
 				if (guessesLeft === 0) {
 					gameover = true;
 					document.getElementById('result').innerHTML = "You lost :(";
+					document.getElementById('restart').innerHTML = '<a href="javascript:startgame()"> Play Again</a>';
 					document.getElementById('bodybg').style.background = "rgb(247, 60, 60)";
 					document.getElementById('word').innerHTML = "Word: " + st;
 				} else {
@@ -90,7 +76,45 @@ document.onkeyup = function (event) {
 
 
 	}
+
 };
 
-console.log(st);
-//textContent
+
+
+function startgame() {
+	gameover = false;
+	guessesLeft = 10;
+
+	//randomly pick a sports term to use
+	stNum = Math.floor((Math.random() * sport_terms.length) + 1);
+
+	//Get sports term
+	st = sport_terms[stNum][1].trim().toLowerCase();
+
+	//Display game type
+	var gameType = "";
+	gameType = sport_terms[stNum][0].trim().toLowerCase();
+	document.getElementById('gametype').innerHTML += "&nbsp" + gameType;
+
+	//Build dashes
+	blankHangman = "";
+	guessedLetters = "";
+	for (var x = 0; x < st.length; x++) {
+		if (st.substring(x, x + 1) === " ") {
+			blankHangman = blankHangman + " ";
+		} else {
+			blankHangman = blankHangman + "-";
+		}
+	};
+
+	document.getElementById('result').innerHTML = "Press any key to begin guessing the word...";
+	document.getElementById('puzzle').innerHTML = blankHangman;
+	document.getElementById('guessesleft').innerHTML = guessesLeft;
+	document.getElementById('restart').innerHTML = "";
+	document.getElementById('wrong').innerHTML = "";
+	document.getElementById('definition').innerHTML = "";
+	document.getElementById('bodybg').style.background = "yellow";
+
+	// console.log(st);
+}
+

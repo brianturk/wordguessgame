@@ -1,0 +1,15 @@
+body {
+    font-size: 300%;
+  }
+
+  .navbar-brand {
+    font-size:  85%;
+  }
+  
+  .navbar-nav {
+    font-size: 85%;
+  }
+
+  #result {
+    font-family: 'Luckiest Guy', cursive;
+  }

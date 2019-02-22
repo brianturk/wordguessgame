@@ -56,12 +56,18 @@ document.onkeyup = function (event) {
 				document.getElementById('wrong').innerHTML = key + "&nbsp" + document.getElementById('wrong').innerHTML;
 				guessesLeft--;
 				document.getElementById('guessesleft').innerHTML = guessesLeft;
-				if (guessesLeft === 0) {
+				if (guessesLeft === 0) {   //lost
 					gameover = true;
-					document.getElementById('result').innerHTML = "You lost :(";
+					if (wins === 1) {
+						plural = "";
+					} else {
+						plural = "s";
+					}
+					document.getElementById('result').innerHTML = "You lost :(. You had " + wins + " win" + plural + ".";
 					document.getElementById('restart').innerHTML = '<a href="javascript:startgame()"> Play Again</a>';
 					document.getElementById('bodybg').style.background = "rgb(247, 60, 60)";
 					document.getElementById('word').innerHTML = "Word: " + st;
+					wins = 0;
 				} else {
 					document.getElementById('result').innerHTML = "Sorry, that's wrong. Keep going...";
 				}
@@ -94,7 +100,7 @@ function startgame() {
 	//Display game type
 	var gameType = "";
 	gameType = sport_terms[stNum][0].trim().toLowerCase();
-	document.getElementById('gametype').innerHTML += "&nbsp" + gameType;
+	document.getElementById('gametype').innerHTML = "&nbsp" + gameType;
 
 	//Build dashes
 	blankHangman = "";

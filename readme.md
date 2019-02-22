@@ -1,1 +1,1 @@
-This is a word guessing game with all sports terms.  Please see the "Help" page in the application for more assistance.
+This is a word guessing game with all sports terms.  Please see the "Help" page in the application for more assistance.  Note that the word to guess is in the console log if you want to cheat to see what happens when you win.

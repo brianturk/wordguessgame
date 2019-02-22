@@ -121,6 +121,6 @@ function startgame() {
 	document.getElementById('definition').innerHTML = "";
 	document.getElementById('bodybg').style.background = "yellow";
 
-	// console.log(st);
+	console.log(st);
 }
 
